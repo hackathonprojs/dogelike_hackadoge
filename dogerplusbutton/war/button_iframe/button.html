@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="jquery-1.11.1.min.js"></script>
+</head>
+<body>
+  <style>
+  #slider {
+  border: 2px solid black;
+  height: 38px;
+  width: 76px;
+  border-radius: 34px;
+  background-color: grey;
+}
+
+#icon {
+  float:left;
+  pointer-events: none;
+  border: 1px solid #cccccc;
+  height: 38px;
+  width: 38px;
+  border-radius: 34px;
+  margin-left: 38px;
+  background: transparent url('img/doger.png') center no-repeat;
+  background-size: 100%;
+}
+
+#icon:hover {
+  background: url('img/minus.png') center no-repeat;
+  background-color: grey;
+} 
+
+#counter {
+  margin-top: -35px;
+  margin-left: 35px;
+  font-size: 30px;
+  color: white;
+}
+
+#plus {
+/*  visibility: hidden;*/
+  height: 38px;
+  width: 38px;
+  color: rgb(102,102,102);
+  background: url('img/plus.png') center no-repeat;
+/*  padding-left: 38px;*/
+/*  padding-top: -38px; */
+  float: initial;
+  background: url('');
+  /*38*/
+}
+
+#doge_icon {
+  height: 76px;
+  border-radius: 34px;
+}
+  </style>
+  <div id="container">
+    <div class="on" id="slider">
+      <div id="icon">
+        <div id="counter">
+        </div>
+      </div>
+      <div id="plus">
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  $('#counter').html(counter.toString());
+  $('#slider').click(function() {
+    $.get("http://dogecoinerme.appspot.com/oneclick.jsp?uid=sol&domain=block.io", function(data) {
+      console.log(data.trim());
+      counter = data.trim();
+      $('#counter').html(counter.toString());
+    });
+    $('#plus').css({visibility: 'visible'});
+    if(counter>=1) {
+      $('#icon').animate({marginLeft:"0px"}, 200);
+      $('#slider').css({backgroundColor:"rgb(0, 255, 0)"});
+      $('#icon').css({pointerEvents:"auto"});
+    } else {
+      $('#icon').animate({marginLeft:'38px'}, 200);
+      $('#slider').css({backgroundColor:'grey'});
+      $('#icon').css({pointerEvents:'none'});
+    }
+  });
+  $('#icon').click(function() {
+    counter -= 2;
+    $('#counter').html(counter.toString());
+  });
+  $('#plus').click(function() {
+    $('#counter').html(counter.toString());
+  });
+  </script>
+</body>
+</html>
